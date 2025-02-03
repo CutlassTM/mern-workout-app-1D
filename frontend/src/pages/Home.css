@@ -1,100 +1,17 @@
-/* Home.css */
-
-/* General page styling */
-.home {
-    font-family: Arial, sans-serif;
-    background-color: #f4f7fc; /* Light background for the whole page */
-    color: #333; /* Dark text color */
-    padding: 20px;
-    min-height: 100vh;
-  }
-  
-  /* Styling for the search bar */
-  .search-bar {
+.search-bar {
     width: 100%;
     max-width: 400px;
-    padding: 10px 15px;
+    padding: 8px 12px;
     margin: 20px 0;
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
-    background-color: #fff; /* White background */
-    color: #333; /* Dark text */
-    transition: all 0.3s ease;
   }
   
-  /* Search bar focus effect */
   .search-bar:focus {
     outline: none;
-    border-color: #007bff; /* Blue border on focus */
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Blue glow */
-    background-color: #fff;
-    color: #000;
-  }
-  
-  /* Hover effect on search bar */
-  .search-bar:hover {
-    border-color: #007bff; /* Blue border on hover */
-    background-color: #e9f3ff; /* Light blue background on hover */
-  }
-  
-  /* Styling for the workouts section */
-  .workouts {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 20px;
-    margin-top: 20px;
-  }
-  
-  /* Styling for each workout item */
-  .workout-item {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    transition: transform 0.2s ease-in-out;
-  }
-  
-  .workout-item:hover {
-    transform: scale(1.05); /* Slightly enlarge on hover */
-  }
-  
-  /* Styling for the workout details */
-  .workout-details {
-    padding: 20px;
-    font-size: 16px;
-    color: #555;
-  }
-  
-  /* Styling for the workout form */
-  .workout-form {
-    margin-top: 30px;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Button styling for form buttons */
-  .workout-form button {
-    background-color: #007bff; /* Blue button */
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .workout-form button:hover {
-    background-color: #0056b3; /* Darker blue on hover */
-  }
-  
-  /* No workouts found styling */
-  .no-workouts {
-    color: #888;
-    font-style: italic;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
   }
   
