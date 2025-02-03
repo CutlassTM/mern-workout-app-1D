@@ -1,47 +1,42 @@
-import { useEffect } from "react";
-import WorkoutDetails from "../components/WorkoutDetails";
-import WorkoutForm from "../components/WorkoutForm";
-import { useWorkoutContext } from "../hooks/useWorkoutsContext";
-import { useAuthContext } from "../hooks/useAuthContext";
+import { useEffect }from 'react'
+import { useWorkoutsContext } from "../hooks/useWorkoutsContext"
+import { useAuthContext } from "../hooks/useAuthContext"
 
-function Home() {
-  // const [workouts, setWorkouts] = useState(null); // local state
-  const { workouts, dispatch } = useWorkoutContext(); // global context state
-  const { user } = useAuthContext();
+// components
+import WorkoutDetails from '../components/WorkoutDetails'
+import WorkoutForm from '../components/WorkoutForm'
+
+const Home = () => {
+  const {workouts, dispatch} = useWorkoutsContext()
+  const {user} = useAuthContext()
 
   useEffect(() => {
     const fetchWorkouts = async () => {
-      const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/api/workouts`,
-        {
-          headers: {
-            Authorization: `Bearer ${user.token}`,
-          },
-        }
-      );
-      const json = await response.json(); // parse JSON response body as JS array of objects
+      const response = await fetch('/api/workouts', {
+        headers: {'Authorization': `Bearer ${user.token}`},
+      })
+      const json = await response.json()
+
       if (response.ok) {
-        // setWorkouts(workouts);
-        dispatch({ type: "SET_WORKOUTS", payload: json });
+        dispatch({type: 'SET_WORKOUTS', payload: json})
       }
-    };
+    }
 
     if (user) {
-      fetchWorkouts();
+      fetchWorkouts()
     }
-  }, [dispatch, user]); // external function must be in dependency array
+  }, [dispatch, user])
 
   return (
     <div className="home">
       <div className="workouts">
-        {workouts &&
-          workouts.map((workout) => (
-            <WorkoutDetails key={workout._id} workout={workout} />
-          ))}
+        {workouts && workouts.map((workout) => (
+          <WorkoutDetails key={workout._id} workout={workout} />
+        ))}
       </div>
       <WorkoutForm />
     </div>
-  );
+  )
 }
 
-export default Home;
+export default Home
