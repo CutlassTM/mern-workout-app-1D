@@ -3,7 +3,7 @@ import WorkoutDetails from "../components/WorkoutDetails";
 import WorkoutForm from "../components/WorkoutForm";
 import { useWorkoutContext } from "../hooks/useWorkoutContext";
 import { useAuthContext } from "../hooks/useAuthContext";
-import "../styles/Home.css"; // Import the new CSS file
+import "./Home.css"; 
 
 function Home() {
   const { workouts, dispatch } = useWorkoutContext();
