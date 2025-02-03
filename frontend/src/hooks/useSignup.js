@@ -10,19 +10,20 @@ export const useSignup = () => {
     setIsLoading(true)
     setError(null)
 
-    const response = await fetch('/api/user/signup', {
+    const res = await fetch(`${process.env.REACT_APP_API_URL}/api/user/signup`, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({ email, password })
     })
-    const json = await response.json()
+    const json = await res.json()
 
-    if (!response.ok) {
+    if (!res.ok) {
       setIsLoading(false)
       setError(json.error)
+      return
     }
-    if (response.ok) {
-      // save the user to local storage
+    if (res.ok) {
+      // save to local storage
       localStorage.setItem('user', JSON.stringify(json))
 
       // update the auth context
