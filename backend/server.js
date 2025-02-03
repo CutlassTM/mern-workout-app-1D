@@ -1,37 +1,33 @@
-import 'dotenv/config'; // Load environment variables
-import express from 'express';
-import mongoose from 'mongoose';
-import workoutRoutes from './routes/workouts.js'; // Ensure to include the .js extension
-import cors from "cors";
-//Require cors
+require('dotenv').config()
 
+const express = require('express')
+const mongoose = require('mongoose')
+const workoutRoutes = require('./routes/workouts')
+const userRoutes = require('./routes/user')
 
-// Express app
-const app = express();
+// express app
+const app = express()
 
-// Allow requests from all origins (for development only)
-app.use(cors());
-
-// Middleware
-app.use(express.json());
+// middleware
+app.use(express.json())
 
 app.use((req, res, next) => {
-  console.log(req.path, req.method);
-  next();
-});
+  console.log(req.path, req.method)
+  next()
+})
 
-// Routes
-app.use('/api/workouts', workoutRoutes);
+// routes
+app.use('/api/workouts', workoutRoutes)
+app.use('/api/user', userRoutes)
 
-// Connect to the database
+// connect to db
 mongoose.connect(process.env.MONGO_URI)
   .then(() => {
-    console.log('Connected to database');
-    // Listen on port
+    // listen for requests
     app.listen(process.env.PORT, () => {
-      console.log('Listening for requests on port', process.env.PORT);
-    });
+      console.log('connected to db & listening on port', process.env.PORT)
+    })
   })
-  .catch((err) => {
-    console.error(err);
-  });
+  .catch((error) => {
+    console.log(error)
+  })
