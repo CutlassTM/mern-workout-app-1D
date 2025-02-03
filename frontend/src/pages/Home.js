@@ -5,6 +5,7 @@ import { useWorkoutContext } from "../hooks/useWorkoutContext";
 import { useAuthContext } from "../hooks/useAuthContext";
 
 function Home() {
+  //
   // const [workouts, setWorkouts] = useState(null); // local state
   const { workouts, dispatch } = useWorkoutContext(); // global context state
   const { user } = useAuthContext();
