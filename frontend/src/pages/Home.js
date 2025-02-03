@@ -1,70 +1,42 @@
-import { useEffect, useState } from "react";
-import WorkoutDetails from "../components/WorkoutDetails";
-import WorkoutForm from "../components/WorkoutForm";
-import { useWorkoutContext } from "../hooks/useWorkoutsContext";
-import { useAuthContext } from "../hooks/useAuthContext";
-import "./Home.css"; 
+import { useEffect }from 'react'
+import { useWorkoutsContext } from "../hooks/useWorkoutsContext"
+import { useAuthContext } from "../hooks/useAuthContext"
 
-function Home() {
-  const { workouts, dispatch } = useWorkoutContext();
-  const { user } = useAuthContext();
-  const [search, setSearch] = useState("");
+// components
+import WorkoutDetails from '../components/WorkoutDetails'
+import WorkoutForm from '../components/WorkoutForm'
+
+const Home = () => {
+  const {workouts, dispatch} = useWorkoutsContext()
+  const {user} = useAuthContext()
 
   useEffect(() => {
     const fetchWorkouts = async () => {
-      const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/api/workouts`,
-        {
-          headers: {
-            Authorization: `Bearer ${user.token}`,
-          },
-        }
-      );
-      const json = await response.json();
+      const response = await fetch('/api/workouts', {
+        headers: {'Authorization': `Bearer ${user.token}`},
+      })
+      const json = await response.json()
+
       if (response.ok) {
-        dispatch({ type: "SET_WORKOUTS", payload: json });
+        dispatch({type: 'SET_WORKOUTS', payload: json})
       }
-    };
+    }
 
     if (user) {
-      fetchWorkouts();
+      fetchWorkouts()
     }
-  }, [dispatch, user]);
-
-  // Filter workouts by title
-  const filteredWorkouts = workouts
-    ? workouts.filter((workout) =>
-        workout.title.toLowerCase().includes(search.toLowerCase())
-      )
-    : [];
+  }, [dispatch, user])
 
   return (
     <div className="home">
-      <h2>My Workouts</h2>
-      
-      {/* Search Bar */}
-      <input
-        type="text"
-        placeholder="Search workouts..."
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        className="search-bar"
-      />
-
-      {/* Workout Cards */}
       <div className="workouts">
-        {filteredWorkouts.length > 0 ? (
-          filteredWorkouts.map((workout) => (
-            <WorkoutDetails key={workout._id} workout={workout} />
-          ))
-        ) : (
-          <p className="no-results">No workouts found.</p>
-        )}
+        {workouts && workouts.map((workout) => (
+          <WorkoutDetails key={workout._id} workout={workout} />
+        ))}
       </div>
-
       <WorkoutForm />
     </div>
-  );
+  )
 }
 
-export default Home;
+export default Home
